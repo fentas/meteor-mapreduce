@@ -1,8 +1,8 @@
 Package.describe({
-  "summary": "Proper MongoDB aggregations support for Meteor",
-  "version": "1.3.0",
-  "git": "https://github.com/meteorhacks/meteor-aggregate.git",
-  "name": "meteorhacks:aggregate"
+  "summary": "Proper MongoDB mapReduce support for Meteor",
+  "version": "0.1.0",
+  "git": "https://github.com/fentas/meteor-mapreduce.git",
+  "name": "fentas:mapreduce"
 });
 
 Package.onUse(function(api) {
