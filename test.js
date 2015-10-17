@@ -14,7 +14,7 @@ Tinytest.add("let's mapReduce", function(test) {
     {out: {inline: 1}}
   );
 
-  test.equal(_.result, [{_id: 1, resTime: 20}]);
+  test.equal(_, [{_id: 1, resTime: 20}]);
 });
 
 Tinytest.add("aggregate on Meteor.users", function(test) {
@@ -29,5 +29,5 @@ Tinytest.add("aggregate on Meteor.users", function(test) {
     {out: {inline: 1}}
   );
 
-  test.equal(_.result, [{_id: 1, resTime: 40}]);
-}); 
+  test.equal(_, [{_id: 1, resTime: 40}]);
+});
