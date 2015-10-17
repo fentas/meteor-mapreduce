@@ -8,13 +8,13 @@ Tinytest.add("let's mapReduce", function(test) {
   coll.insert({resTime: 20});
   coll.insert({resTime: 40});
 
-  var _ = coll.mapReduce(
+  var result = coll.mapReduce(
     function() { emit(1, { time: this.resTime }); },
     function(key, values) { return Array.sum(values); },
     {out: {inline: 1}}
   );
 
-  test.equal(_.result, [{_id: 1, time: 60}]);
+  test.equal(result, [{_id: 1, value: {time: 60}}]);
 });
 
 Tinytest.add("aggregate on Meteor.users", function(test) {
@@ -23,11 +23,11 @@ Tinytest.add("aggregate on Meteor.users", function(test) {
   coll.insert({resTime: 20});
   coll.insert({resTime: 40});
 
-  var _ = coll.mapReduce(
+  var result = coll.mapReduce(
     function() { emit(1, { time: this.resTime }); },
     function(key, values) { return Array.sum(values); },
     {out: {inline: 1}}
   );
 
-  test.equal(_.result, [{_id: 1, time: 60}]);
+  test.equal(result, [{_id: 1, value: {time: 60}}]);
 });
