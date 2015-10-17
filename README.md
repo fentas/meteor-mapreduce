@@ -1,8 +1,8 @@
-[![](https://api.travis-ci.org/meteorhacks/meteor-aggregate.svg)](https://travis-ci.org/meteorhacks/meteor-aggregate)
+[![](https://api.travis-ci.org/fentas/meteor-mapreduce.svg)](https://travis-ci.org/fentas/meteor-mapreduce)
 
-# meteorhacks:aggregate
+# fentas:mapreduce
 
-A simple package to add proper aggregation support for Meteor. This package exposes `.aggregate` method on `Mongo.Collection` instances.
+A simple package to add proper mapReduce support for Meteor. This package exposes `.mapReduce` method on `Mongo.Collection` instances.
 
 > this only works on server side and there is no oberserving support or reactivity built in
 
@@ -10,34 +10,27 @@ A simple package to add proper aggregation support for Meteor. This package expo
 
 Add to your app with
 ```
-meteor add meteorhacks:aggregate
+meteor add fentas:mapreduce
 ```
 
-Then simply use `.aggregate` function like below.
+Then simply use `.mapReduce` function like below.
 
 ```js
 var metrics = new Mongo.Collection('metrics');
-var pipeline = [
-  {$group: {_id: null, resTime: {$sum: "$resTime"}}}
-];
-var result = metrics.aggregate(pipeline);
+function map() {
+  emit(1, {
+    v: this.value
+  })
+}
+function reduce(key, value) {
+  return Math.max.apply(null, value)
+}
+var result = metrics.mapReduce(map, reduce, {out: {inline: 1}});
 ```
-
-### Using Options
-
-~~~js
-var result = new Mongo.Collection('metrics');
-var metrics = new Mongo.Collection('metrics');
-var pipeline = [
-  {$group: {_id: null, resTime: {$sum: "$resTime"}}}
-];
-var result = metrics.aggregate(pipeline, {explain: true});
-console.log("Explain Report:", JSON.stringify(result[0]), null, 2);
-~~~
 
 ## Why?
 
-There are few other aggregation packages out there. All of them written with some complex hacks and there are some easy way to do things.
+There are few other mapReduce packages out there. All of them written with some complex hacks and there are some easy way to do things.
 They also don't work with custom Mongo drivers as well.
 
 And this package is short and simple. (~20 LOC)
