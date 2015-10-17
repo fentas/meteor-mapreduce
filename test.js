@@ -30,4 +30,4 @@ Tinytest.add("aggregate on Meteor.users", function(test) {
   );
 
   test.equal(_.result, [{_id: 1, resTime: 40}]);
-});
+}); 
