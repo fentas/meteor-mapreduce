@@ -22,8 +22,8 @@ function map() {
     v: this.value
   })
 }
-function reduce(key, value) {
-  return Math.max.apply(null, value)
+function reduce(key, values) {
+  return Array.sum(values)
 }
 var result = metrics.mapReduce(map, reduce, {out: {inline: 1}});
 ```
